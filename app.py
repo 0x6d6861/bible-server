@@ -17,9 +17,10 @@ class Key(db.Model):
     __table_args__ = {'extend_existing': True}
     b = db.Column(db.Integer, primary_key=True)
     n = db.Column(db.String(80), unique=False, nullable=True)
+    c_number = db.Column(db.Integer, primary_key=True)
 
     def __repr__(self):
-        return '<Key %r>' % self.n
+        return '<Book %r>' % self.n
 
     def toDict(self):
         return {c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs}
