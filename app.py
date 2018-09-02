@@ -110,7 +110,7 @@ def versions():
 
 
 @app.route('/books')
-def versions():
+def books():
     data = [book.toDict() for book in Key.query.all()]
     return jsonify(data)
 
