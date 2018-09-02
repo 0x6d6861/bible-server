@@ -40,7 +40,9 @@ def Passage(table):
 
         def toDict(self):
             return {c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs}
+
     return PassageClass()
+
 
 class Version(db.Model):
     __tablename__ = 'bible_version_key'
@@ -74,11 +76,11 @@ def dict_factory(cursor, row):
 def index():
     return jsonify(message="Hello, world!")
 
+
 # http://localhost:5000/read?from=1001001&to=1001009
 # http://localhost:5000/read?book=1&chapter=1&verse=1
 @app.route('/read')
 def read():
-
     ref_from = request.args.get('from')
     ref_to = request.args.get('to')
     data = []
@@ -100,9 +102,16 @@ def read():
 
     return jsonify(data)
 
+
 @app.route('/versions')
 def versions():
-    data = [ver.toDict() for ver in Passage('t_web').query.limit(5).all()]
+    data = [ver.toDict() for ver in Version.query.all()]
+    return jsonify(data)
+
+
+@app.route('/books')
+def versions():
+    data = [book.toDict() for book in Key.query.all()]
     return jsonify(data)
 
 
