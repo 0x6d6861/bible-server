@@ -2,10 +2,13 @@ from flask import Flask, jsonify, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import inspect
 from sqlalchemy.ext.declarative import declarative_base
+from flask_cors import CORS
+
 
 Base = declarative_base()
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/bible-sqlite.db'
 
